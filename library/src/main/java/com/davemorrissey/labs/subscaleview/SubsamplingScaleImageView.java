@@ -1800,6 +1800,9 @@ public class SubsamplingScaleImageView extends View {
             bitmap = previewBitmap;
         }
         bitmapIsPreview = true;
+        if (onImageEventListener != null) {
+            onImageEventListener.onPreviewLoaded();
+        }
         if (checkReady()) {
             invalidate();
             requestLayout();
@@ -3159,6 +3162,11 @@ public class SubsamplingScaleImageView extends View {
         void onReady();
 
         /**
+         * Called when the preview image is ready.
+         */
+        void onPreviewLoaded();
+
+        /**
          * Called when the full size image is ready. When using tiling, this means the lowest resolution
          * base layer of tiles are loaded, and when tiling is disabled, the image bitmap is loaded.
          * This event could be used as a trigger to enable gestures if you wanted interaction disabled
@@ -3206,6 +3214,7 @@ public class SubsamplingScaleImageView extends View {
     public static class DefaultOnImageEventListener implements OnImageEventListener {
 
         @Override public void onReady() { }
+        @Override public void onPreviewLoaded() { }
         @Override public void onImageLoaded() { }
         @Override public void onPreviewLoadError(Exception e) { }
         @Override public void onImageLoadError(Exception e) { }
