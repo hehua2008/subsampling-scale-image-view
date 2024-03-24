@@ -1,4 +1,4 @@
-apply plugin: 'maven'
+//apply plugin: 'maven'
 apply plugin: 'signing'
 
 def isReleaseBuild() {
@@ -24,6 +24,7 @@ afterEvaluate { project ->
         sign configurations.archives
     }
 
+    /*
     uploadArchives {
         configuration = configurations.archives
         repositories.mavenDeployer {
@@ -62,6 +63,7 @@ afterEvaluate { project ->
             }
         }
     }
+    */
 
     task androidJavadocs(type: Javadoc) {
         onlyIf { gradle.taskGraph.hasTask("uploadArchives") }

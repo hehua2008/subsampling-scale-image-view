@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    namespace = "com.davemorrissey.labs.subscaleview.test"
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 34
         applicationId "com.davemorrissey.labs.subscaleview.test"
     }
 
@@ -14,9 +15,16 @@ android {
             assets.srcDirs = ['assets']
         }
     }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(11))
+        }
+    }
 }
 
 dependencies {
     implementation project(':library')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.annotation:annotation:1.7.1"
+    implementation "androidx.fragment:fragment:1.6.2"
 }
